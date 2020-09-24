@@ -5,7 +5,7 @@ const Example = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace(`/examples/richtext`)
+    router.replace(`/examples/gyedit`)
   })
 
   return null

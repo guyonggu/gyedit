@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffd80b1f-7d28-48c7-966d-30a47b503009" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/site/examples/richText.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/site/pages/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/site/examples/gyedit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/withMarkdown.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/pages/examples/[example].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/site/pages/examples/[example].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/pages/examples/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/site/pages/examples/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/site/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +24,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="tsconfig.json" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -35,12 +46,19 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/site" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -50,11 +68,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600860823624</updated>
-      <workItem from="1600860824792" duration="4951000" />
+      <workItem from="1600860824792" duration="17827000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="161" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600919029773">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="161" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1600919029773" />
+    <state x="488" y="203" key="FileChooserDialogImpl" timestamp="1600868209080">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="488" y="203" key="FileChooserDialogImpl/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1600868209080" />
+    <state x="407" y="196" width="586" height="490" key="find.popup" timestamp="1600868273901">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="407" y="196" width="586" height="490" key="find.popup/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1600868273901" />
   </component>
 </project>

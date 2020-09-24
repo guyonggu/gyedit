@@ -25,6 +25,7 @@ import RichText from '../../examples/richtext'
 import SearchHighlighting from '../../examples/search-highlighting'
 import CodeHighlighting from '../../examples/code-highlighting'
 import Tables from '../../examples/tables'
+import GYEdit from '../../examples/gyedit'
 
 // node
 import { getAllExamples } from '../api'
@@ -34,6 +35,7 @@ const EXAMPLES = [
   ['Editable Voids', EditableVoids, 'editable-voids'],
   ['Embeds', Embeds, 'embeds'],
   ['Forced Layout', ForcedLayout, 'forced-layout'],
+    ['GYEdit', GYEdit, 'gyedit'],
   ['Hovering Toolbar', HoveringToolbar, 'hovering-toolbar'],
   ['Huge Document', HugeDocument, 'huge-document'],
   ['Images', Images, 'images'],

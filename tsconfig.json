@@ -1,0 +1,15 @@
+{
+  "extends": "./config/typescript/tsconfig.json",
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "tsx": "react"
+  },
+  "strict": false,
+  "noImplicitAny": false,
+  "esModuleInterop": true
+}
