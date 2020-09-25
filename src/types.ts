@@ -1,11 +1,13 @@
-import { Element } from 'slate'
+import { Element, Path } from 'slate'
 
 export interface ListNode extends Element {
-    type: 'ul' | 'ol',
+    type: 'bulleted-list' | 'numbered-list',
     indent: number,
-    start: number
+    start?: number
 }
 
+export type ListNodeEntry = [ListNode, Path]
+
 export interface ListItemNode extends Element{
-    type: 'li'
+    type: 'list-item'
 }

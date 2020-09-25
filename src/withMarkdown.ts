@@ -1,5 +1,5 @@
 import {Editor, Point, Range, Transforms} from "slate";
-
+import {ListNode, ListNodeEntry} from './types'
 const SHORTCUTS = {
     '*': 'ul-item',
     '-': 'ul-item',
@@ -13,73 +13,91 @@ const SHORTCUTS = {
     '######': 'heading-six',
 }
 
-export const withMarkdown = editor => {
-    const { deleteBackward, insertText } = editor
+export const withMarkdown = (editor: Editor) => {
+    const {deleteBackward, insertText} = editor
 
-    editor.insertText = text => {
-        const { selection } = editor
+    editor.insertText = (text: string) => {
+        const {selection} = editor
+        if ((text !== ' ') || !selection || !Range.isCollapsed(selection)) {
+            insertText(text)
+            return
+        }
 
-        if (text === ' ' && selection && Range.isCollapsed(selection)) {
-            const { anchor } = selection
-            const block = Editor.above(editor, {
-                match: n => Editor.isBlock(editor, n),
-            })
-            const path = block ? block[1] : []
-            const start = Editor.start(editor, path)
-            const range = { anchor, focus: start }
-            const beforeText = Editor.string(editor, range)
+        const {anchor} = selection
+        const block = Editor.above(editor, {
+            match: n => Editor.isBlock(editor, n),
+        })
+        const path = block ? block[1] : []
+        const start = Editor.start(editor, path)
+        const range = {anchor, focus: start}
+        let beforeText = Editor.string(editor, range)
+        let tabs = 0
+        for (let c of beforeText) {
+            if (c === '\t') {
+                tabs++
+            }
+        }
+        beforeText = beforeText.substr(tabs)
+        const blockType = block![0].type
+        let inList = typeof blockType === 'string' ? blockType === 'list-item' : false
+
+        if (text === ' ') {
+
             let type = SHORTCUTS[beforeText]
 
-            if (!type && /^([\t]*)\d+\./.test(beforeText)){
+            if (!type && /^[1-9]\d*\./.test(beforeText)) {
                 type = 'ol-item'
             }
-            let list
-            const blockType = block[0].type
-            console.log("blockType",blockType)
-            let inList = typeof blockType === 'string' ? blockType.endsWith('-list') || blockType === 'list-item': false
+            let list:ListNode
             switch (type) {
                 case 'ul-item':
-                    if(inList) break
+                    if (inList) break
                     Transforms.select(editor, range)
                     Transforms.delete(editor)
                     Transforms.setNodes(
                         editor,
-                        { type: 'list-item'},
-                        { match: n => Editor.isBlock(editor, n) }
+                        {type: 'list-item'},
+                        {match: n => Editor.isBlock(editor, n)}
                     )
-                    list = { type: 'bulleted-list', children: [] }
+                    list = {type: 'bulleted-list', indent: tabs+1, children: []}
                     Transforms.wrapNodes(editor, list, {
                         match: n => n.type === 'list-item',
                     })
                     break
                 case 'ol-item':
-                    if(inList) break
+                    if (inList) break
                     const found = beforeText.match(/^([\t]*)\d+\./)
-                    const indent = found[1].length
                     Transforms.select(editor, range)
                     Transforms.delete(editor)
                     Transforms.setNodes(
                         editor,
-                        { type: 'list-item' },
-                        { match: n => Editor.isBlock(editor, n) }
+                        {type: 'list-item'},
+                        {match: n => Editor.isBlock(editor, n)}
                     )
-                    list = { type: 'numbered-list', children: [] }
+                    list = {type: 'numbered-list', indent: tabs+1, children: []}
                     Transforms.wrapNodes(editor, list, {
                         match: n => n.type === 'list-item',
                     })
                     break
                 default:
                     insertText(text)
-
-                return
             }
+            return
+        } else if (text === '\t' && inList && beforeText === '') {
+            const [listNode] = Editor.parent(editor, path) as ListNodeEntry
+            console.log(listNode.type)
+            if (listNode.type === 'bulleted-list' || listNode.type === 'numbered-list') {
+                listNode.indent++
+            }
+            Transforms.select(editor, path)
+            return
         }
 
         insertText(text)
     }
 
     editor.deleteBackward = (...args) => {
-        const { selection } = editor
+        const {selection} = editor
 
         if (selection && Range.isCollapsed(selection)) {
             const match = Editor.above(editor, {
@@ -94,7 +112,7 @@ export const withMarkdown = editor => {
                     block.type !== 'paragraph' &&
                     Point.equals(selection.anchor, start)
                 ) {
-                    Transforms.setNodes(editor, { type: 'paragraph' })
+                    Transforms.setNodes(editor, {type: 'paragraph'})
 
                     if (block.type === 'list-item') {
                         Transforms.unwrapNodes(editor, {

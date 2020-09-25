@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import isHotkey from 'is-hotkey'
-import { Editable, withReact, useSlate, Slate } from 'slate-react'
+import {Editable, withReact, useSlate, Slate, ReactEditor} from 'slate-react'
 import { Editor, Transforms, createEditor, Node } from 'slate'
 import { withHistory } from 'slate-history'
 
 import { Button, Icon, Toolbar } from '../components'
-import { withMarkdown, Element, Leaf } from '../../src/'
+import { withMarkdown, onKeyDown, Element, Leaf } from '../../src/'
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -22,7 +22,7 @@ const GYEdit = () => {
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
     return (
-        <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+        <Slate editor={editor as ReactEditor} value={value} onChange={value => setValue(value)}>
             <Toolbar>
                 <MarkButton format="bold" icon="format_bold" />
                 <MarkButton format="italic" icon="format_italic" />
@@ -41,12 +41,17 @@ const GYEdit = () => {
                 spellCheck
                 autoFocus
                 onKeyDown={event => {
+                    let done:boolean = false
                     for (const hotkey in HOTKEYS) {
                         if (isHotkey(hotkey, event as any)) {
                             event.preventDefault()
                             const mark = HOTKEYS[hotkey]
                             toggleMark(editor, mark)
+                            done = true
                         }
+                    }
+                    if (!done){
+                        onKeyDown()(event, editor)
                     }
                 }}
             />

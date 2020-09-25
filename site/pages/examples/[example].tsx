@@ -230,7 +230,7 @@ const ExampleContent = props => (
     {...props}
     className={css`
       background: #fff;
-    `}
+    `+' gy-content-editor'}
   />
 )
 
@@ -275,7 +275,7 @@ const ExamplePage = ({ example }: { example: string }) => {
       >
       <div>
         <Head>
-          <title>Slate Examples</title>
+          <title>GyEdit</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="/index.css" />

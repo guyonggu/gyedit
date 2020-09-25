@@ -1,11 +1,13 @@
 import React, { useCallback, useMemo, useState } from 'react'
+import {ListNode} from './types'
 
 export const Element = ({ attributes, children, element }:any) => {
     switch (element.type) {
         case 'block-quote':
             return <blockquote {...attributes}>{children}</blockquote>
         case 'bulleted-list':
-            return <ul {...attributes}>{children}</ul>
+            attributes['data-indent'] = (element as ListNode).indent
+            return <ul style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ul>
         case 'heading-one':
             return <h1 {...attributes}>{children}</h1>
         case 'heading-two':
@@ -13,7 +15,8 @@ export const Element = ({ attributes, children, element }:any) => {
         case 'list-item':
             return <li {...attributes}>{children}</li>
         case 'numbered-list':
-            return <ol {...attributes}>{children}</ol>
+            attributes['data-indent'] = (element as ListNode).indent
+            return <ol style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ol>
         default:
             return <p {...attributes}>{children}</p>
     }
