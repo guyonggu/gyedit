@@ -47,7 +47,6 @@ function moveListItemDown(editor: Editor, path: Path) {
     let entry = Editor.parent(editor, path)
     let node: ListNode = entry[0] as ListNode
     if (node.type.endsWith('-list')) {
-        console.log("indent:", node.indent)
         let ref = Editor.pathRef(editor,path)
         let pre = Editor.previous(editor, {at: path})
         let next = Editor.next(editor,{at:path})

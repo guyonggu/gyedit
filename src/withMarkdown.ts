@@ -1,4 +1,4 @@
-import {Editor, Point, Range, Transforms} from "slate";
+import {Editor, Path, Point, Range, Transforms} from "slate";
 import {ListNode, ListNodeEntry} from './types'
 const SHORTCUTS = {
     '*': 'ul-item',
@@ -112,13 +112,20 @@ export const withMarkdown = (editor: Editor) => {
                     block.type !== 'paragraph' &&
                     Point.equals(selection.anchor, start)
                 ) {
-                    Transforms.setNodes(editor, {type: 'paragraph'})
-
                     if (block.type === 'list-item') {
-                        Transforms.unwrapNodes(editor, {
-                            match: n => n.type === 'bulleted-list',
-                            split: true,
-                        })
+                        const parent = Editor.parent(editor,path)
+                        const listNode = parent[0] as ListNode
+                        if(listNode && (listNode.indent > 1)){
+                            Transforms.setNodes(editor, {indent: listNode.indent - 1}, {at: parent[1]})
+                        }else {
+                            Transforms.setNodes(editor, {type: 'paragraph'})
+                            Transforms.unwrapNodes(editor, {
+                                match: n => n.type === 'bulleted-list',
+                                split: true,
+                            })
+                        }
+                    }else{
+                        Transforms.setNodes(editor, {type: 'paragraph'})
                     }
 
                     return
@@ -131,3 +138,4 @@ export const withMarkdown = (editor: Editor) => {
 
     return editor
 }
+
