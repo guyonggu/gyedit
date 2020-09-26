@@ -77,7 +77,7 @@ export const withMarkdown = (editor: Editor) => {
             }
         }
         beforeText = beforeText.substr(tabs)
-        const blockType = block![0].type
+        const blockType = block![0].type as string
         let inList = typeof blockType === 'string' ? blockType === 'list-item' : false
 
         if (text === ' ') {
@@ -116,6 +116,22 @@ export const withMarkdown = (editor: Editor) => {
                     list = {type: 'numbered-list', indent: tabs, children: []}
                     Transforms.wrapNodes(editor, list, {
                         match: n => n.type === 'list-item',
+                    })
+                    break
+                case 'block-quote':
+                    if (inList || blockType !== 'paragraph'){
+                        insertText(text)
+                        break
+                    }
+                    let parent = Editor.above(editor, {match: n => n.type === 'block-quote'})
+                    if (parent){
+                        insertText(text)
+                        break
+                    }
+                    Transforms.select(editor, range)
+                    Transforms.delete(editor)
+                    Transforms.wrapNodes(editor, {type:'block-quote',children:[]}, {
+                        match: n => n.type === 'paragraph'
                     })
                     break
                 default:

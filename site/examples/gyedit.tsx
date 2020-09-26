@@ -178,7 +178,7 @@ const initialValue = [
     },
     {
         type: 'block-quote',
-        children: [{ text: 'A wise quote.' }],
+        children: [{type:'paragraph', children:[{ text: 'A wise quote.' }]}],
     },
     {
         type: 'paragraph',
