@@ -74,13 +74,22 @@ input:focus {
 /*  margin-top: 1em;*/
 /*}*/
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+/**, *::before, *::after {*/
+/*    box-sizing: border-box;*/
+/*}*/
 
-[data-slate-editor] > ul, ol {
+[data-slate-editor]  ul {
     margin: 0 0 0 3px;
     padding: 0;
     /*list-style: none;*/
-    list-style-position: inside;
+    /*list-style-position: inside;*/
+}
+[data-slate-editor]  ol {
+    margin: 0 0 0 3px;
+    padding: 0;
+    /*list-style: none;*/
+    /*list-style-position: inside;*/
+}
+[data-slate-editor]  li {
+    margin: 0 0 0 23px;
 }

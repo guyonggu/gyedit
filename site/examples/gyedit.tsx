@@ -137,6 +137,20 @@ const MarkButton = ({ format, icon }) => {
 
 const initialValue = [
     {
+        type:'numbered-list',
+        children:[
+            {type:'list-item',children:[
+                    {text:"haha"}
+                ]}
+        ]
+    },
+    {
+        type:'bulleted-list',
+        children:[
+            {type:'list-item',children:[{text:"hello"}]}
+        ]
+    },
+    {
         type: 'paragraph',
         children: [
             { text: 'This is editable ' },
