@@ -7,6 +7,8 @@ import { withHistory } from 'slate-history'
 import { Button, Icon, Toolbar } from '../components'
 import { withMarkdown, onKeyDown, Element, Leaf } from '../../src/'
 
+// import '../pages/index.scss'
+
 const HOTKEYS = {
     'mod+b': 'bold',
     'mod+i': 'italic',

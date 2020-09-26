@@ -3,12 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ffd80b1f-7d28-48c7-966d-30a47b503009" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/pages/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/site/pages/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/examples/gyedit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/site/examples/gyedit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/site/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/pages/index.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/site/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/site/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/onKeyDown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/onKeyDown.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/public/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/site/public/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/withMarkdown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/withMarkdown.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +56,7 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/site/pages" />
+      <recent name="$PROJECT_DIR$/site" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -67,7 +70,7 @@
       <updated>1600860823624</updated>
       <workItem from="1600860824792" duration="24499000" />
       <workItem from="1601030339165" duration="7722000" />
-      <workItem from="1601083091560" duration="7067000" />
+      <workItem from="1601083091560" duration="11493000" />
     </task>
     <servers />
   </component>
@@ -83,10 +86,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="488" y="203" key="FileChooserDialogImpl/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1600868209080" />
-    <state x="407" y="196" width="586" height="490" key="find.popup" timestamp="1600868273901">
+    <state x="407" y="196" width="586" height="490" key="find.popup" timestamp="1601098848263">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="407" y="196" width="586" height="490" key="find.popup/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1600868273901" />
+    <state x="407" y="196" width="586" height="490" key="find.popup/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1601098848263" />
     <state x="365" y="203" width="670" height="676" key="search.everywhere.popup" timestamp="1600939278024">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

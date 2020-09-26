@@ -33,7 +33,7 @@ export const withMarkdown = (editor: Editor) => {
             return
         }
         const parent = Editor.parent(editor, block[1])
-        if (!parent) {
+        if (!parent || Editor.isEditor(parent[0])) {
             insertBreak()
             return
         }
