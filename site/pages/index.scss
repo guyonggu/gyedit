@@ -1,6 +1,3 @@
-.gy-content-editor ul[data-indent='1']{
-  padding-left: 20em;
-}
-.gy-content-editor ol[data-indent='1']{
-  padding-left: 10em;
+*, *::before, *::after {
+  box-sizing: border-box;
 }

@@ -1,13 +1,13 @@
 import { Element, Path } from 'slate'
 
-export interface ListNode extends Element {
-    type: 'bulleted-list' | 'numbered-list',
-    indent: number,
+export interface BlockElement extends Element{
+    type: string
+    indent?: number
     start?: number
 }
 
-export type ListNodeEntry = [ListNode, Path]
+export type BlockEntry = [BlockElement, Path]
 
-export interface ListItemNode extends Element{
-    type: 'list-item'
+export enum InlineType{
+    'link'
 }

@@ -1,12 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import {ListNode} from './types'
+import React, {useCallback, useMemo, useState} from 'react'
+import { BlockElement } from './types'
 
-export const Element = ({ attributes, children, element }:any) => {
+export const Element = ({attributes, children, element}: any) => {
     switch (element.type) {
         case 'block-quote':
             return <blockquote {...attributes}>{children}</blockquote>
         case 'bulleted-list':
-            attributes['data-indent'] = (element as ListNode).indent
+            attributes['data-indent'] = (element as BlockElement).indent
             return <ul style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ul>
         case 'heading-one':
             return <h1 {...attributes}>{children}</h1>
@@ -15,14 +15,14 @@ export const Element = ({ attributes, children, element }:any) => {
         case 'list-item':
             return <li {...attributes}>{children}</li>
         case 'numbered-list':
-            attributes['data-indent'] = (element as ListNode).indent
+            attributes['data-indent'] = (element as BlockElement).indent
             return <ol style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ol>
         default:
-            return <p {...attributes}>{children}</p>
+            return <p style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</p>
     }
 }
 
-export const Leaf = ({ attributes, children, leaf }:any) => {
+export const Leaf = ({attributes, children, leaf}: any) => {
     if (leaf.bold) {
         children = <strong>{children}</strong>
     }

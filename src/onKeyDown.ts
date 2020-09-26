@@ -1,5 +1,5 @@
 import {Editor, Range, Path, Location, Transforms} from 'slate'
-import {ListNode, ListItemNode} from './types'
+import { BlockElement} from './types'
 
 
 export const onKeyDown = () => (
@@ -33,19 +33,21 @@ export const onKeyDown = () => (
             // }
         } else {
             let p: Location = selection.anchor
-            if (Range.isCollapsed(selection)) {
-                p = p.path
+            if (Range.isExpanded(selection)) {
+                p = Editor.start(editor,p.path)
             }
+            const ref = Editor.rangeRef(editor,selection)
             Transforms.select(editor, p)
             Editor.insertText(editor, '\t')
-            Transforms.select(editor, selection)
+            Transforms.select(editor, ref.unref()!)
         }
+        // Editor.insertText(editor,'\t')
     }
 };
 
 function moveListItemDown(editor: Editor, path: Path) {
     let entry = Editor.parent(editor, path)
-    let node: ListNode = entry[0] as ListNode
+    let node = entry[0] as BlockElement
     if (node.type.endsWith('-list')) {
         let ref = Editor.pathRef(editor,path)
         let pre = Editor.previous(editor, {at: path})
@@ -57,7 +59,7 @@ function moveListItemDown(editor: Editor, path: Path) {
             Transforms.splitNodes(editor, {at: Path.next(ref.current!)})
         }
         path = ref.unref()!
-        Transforms.setNodes(editor, {indent: node.indent + 1}, {at: Path.parent(path)})
+        Transforms.setNodes(editor, {indent: node.indent! + 1}, {at: Path.parent(path)})
 
     }
 }
