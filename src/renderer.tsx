@@ -1,12 +1,12 @@
 import React, {useCallback, useMemo, useState} from 'react'
-import { BlockElement } from './types'
+import { ListNode } from './types'
 
 export const Element = ({attributes, children, element}: any) => {
     switch (element.type) {
         case 'block-quote':
             return <blockquote {...attributes}>{children}</blockquote>
         case 'bulleted-list':
-            attributes['data-indent'] = (element as BlockElement).indent
+            attributes['data-indent'] = (element as ListNode).indent
             return <ul style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ul>
         case 'heading-one':
             return <h1 {...attributes}>{children}</h1>
@@ -15,7 +15,8 @@ export const Element = ({attributes, children, element}: any) => {
         case 'list-item':
             return <li {...attributes}>{children}</li>
         case 'numbered-list':
-            attributes['data-indent'] = (element as BlockElement).indent
+            attributes['data-indent'] = (element as ListNode).indent
+            attributes.start = element.start!
             return <ol style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ol>
         default:
             return <p style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</p>
