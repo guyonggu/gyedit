@@ -73,9 +73,16 @@ export const fixList = (editor:Editor, path?:Path): void => {
             Transforms.mergeNodes(editor, {at: nextPath})
         }
 
-        let listStart: number[] = prePath ? getListStart(editor, prePath) : []
+        let listStart:number[] = []
+        let updatePath: Path
+        if (prePath){
+            listStart = getListStart(editor, prePath)
+            updatePath = Path.next(prePath)
+        }else{
+            updatePath = ref.unref()!
+        }
         console.log("updateListStart:", listStart)
-        updateListStart(editor, ref.unref()!, listStart)
+        updateListStart(editor, updatePath, listStart)
     }else {
         const next = Editor.next(editor, {at:entry[1]})
         if (next && isListNode(next[0])){
