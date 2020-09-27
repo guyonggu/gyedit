@@ -8,7 +8,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { Icon } from '../../components'
 
 import CheckLists from '../../examples/check-lists'
-import EditableVoids from '../../examples/editable-voids'
+// import EditableVoids from '../../examples/editable-voids'
 import Embeds from '../../examples/embeds'
 import ForcedLayout from '../../examples/forced-layout'
 import HoveringToolbar from '../../examples/hovering-toolbar'
@@ -32,7 +32,7 @@ import { getAllExamples } from '../api'
 
 const EXAMPLES = [
   ['Checklists', CheckLists, 'check-lists'],
-  ['Editable Voids', EditableVoids, 'editable-voids'],
+  // ['Editable Voids', EditableVoids, 'editable-voids'],
   ['Embeds', Embeds, 'embeds'],
   ['Forced Layout', ForcedLayout, 'forced-layout'],
     ['GYEdit', GYEdit, 'gyedit'],
