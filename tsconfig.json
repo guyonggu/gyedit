@@ -1,11 +1,11 @@
 {
   "extends": "./config/typescript/tsconfig.json",
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/**/*"],
   "exclude": [
     "node_modules"
   ],
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDirs": ["./src","./test"],
     "outDir": "./lib",
     "tsx": "react"
   },

@@ -6,6 +6,9 @@ export interface ListNode extends Element{
     start?: number  // for numbered-list, default 1
 }
 
+export interface ListItem extends Element{
+
+}
 
 export enum InlineType{
     'link'
