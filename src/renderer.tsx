@@ -17,9 +17,9 @@ export const Element = ({attributes, children, element}: any) => {
         case 'numbered-list':
             attributes['data-indent'] = (element as ListNode).indent
             attributes.start = element.start!
-            return <ol style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</ol>
+            return <ol style={{paddingLeft: `calc(2em * ${element.indent})`}} {...attributes}>{children}</ol>
         default:
-            return <p style={{paddingLeft: `calc(1em * ${element.indent})`}} {...attributes}>{children}</p>
+            return <p style={{paddingLeft: `calc(2em * ${element.indent})`}} {...attributes}>{children}</p>
     }
 }
 

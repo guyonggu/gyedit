@@ -103,7 +103,7 @@ const updateListStart = (editor:Editor, path:Path, listStart:number[]):void => {
         const start = listStart[indent] || 1
 
         if (node.type === 'numbered-list') {
-            Transforms.setNodes(editor,{start:listStart[indent]}, {at:path})
+            Transforms.setNodes(editor,{start}, {at:path})
         }
         listStart.splice(indent+1)
 

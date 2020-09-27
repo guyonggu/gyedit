@@ -24,16 +24,14 @@ export const onTab = (editor: Editor): void => {
         if (!entry) {
             return
         }
-        if (entry[0].type == 'list-item') {
-            if (Range.isCollapsed(selection)) {
-                const path = entry[1]
-                const start = Editor.start(editor, path)
-                const range = {anchor: selection.anchor, focus: start}
-                let beforeText = Editor.string(editor, range)
-                if (beforeText.length) {
-                    Editor.insertText(editor, '    ')
-                    return
-                }
+        const path = entry[1]
+        const start = Editor.start(editor, path)
+        const range = {anchor: selection.anchor, focus: start}
+        let beforeText = Editor.string(editor, range)
+        if (entry[0].type === 'list-item') {
+            if (Range.isCollapsed(selection) && beforeText.length) {
+                Editor.insertText(editor, '    ')
+                return
             }
             // // move down with tab
             // const tab = !e.shiftKey;
@@ -41,16 +39,24 @@ export const onTab = (editor: Editor): void => {
             moveListItemDown(editor, entry[1]);
             fixList(editor)
             // }
-        } else {
-            let p: Location = selection.anchor
-            if (Range.isExpanded(selection)) {
-                p = Editor.start(editor, p.path)
+        } else{
+            if (Range.isCollapsed(selection) && beforeText.length) {
+                Editor.insertText(editor, '    ')
+                return
             }
-            const ref = Editor.rangeRef(editor, selection)
-            Transforms.select(editor, p)
-            Editor.insertText(editor, '    ')
-            Transforms.select(editor, ref.unref()!)
+            const indent:number = (entry[0].indent as number)|| 0
+            Transforms.setNodes(editor,{indent: indent+1}, {at:entry[1]})
         }
+        // else {
+        //     let p: Location = selection.anchor
+        //     if (Range.isExpanded(selection)) {
+        //         p = Editor.start(editor, p.path)
+        //     }
+        //     const ref = Editor.rangeRef(editor, selection)
+        //     Transforms.select(editor, p)
+        //     Editor.insertText(editor, '    ')
+        //     Transforms.select(editor, ref.unref()!)
+        // }
     })
 }
 

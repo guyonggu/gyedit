@@ -76,13 +76,6 @@ export const withMarkdown = (editor: Editor) => {
         const start = Editor.start(editor, path)
         const range = {anchor, focus: start}
         let beforeText = Editor.string(editor, range)
-        let tabs = 0
-        for (let c of beforeText) {
-            if (c === '\t') {
-                tabs++
-            }
-        }
-        beforeText = beforeText.substr(tabs)
         const blockType = block![0].type as string
         let inList = typeof blockType === 'string' ? blockType === 'list-item' : false
 
@@ -92,6 +85,7 @@ export const withMarkdown = (editor: Editor) => {
         if (!type && /^[1-9]\d*\./.test(beforeText)) {
             type = 'ol-item'
         }
+        const indent = block![0].indent || 0
         let list
         switch (type) {
             case 'ul-item':
@@ -103,10 +97,10 @@ export const withMarkdown = (editor: Editor) => {
                 Transforms.delete(editor)
                 Transforms.setNodes(
                     editor,
-                    {type: 'list-item'},
+                    {type: 'list-item', indent:null},
                     {match: n => Editor.isBlock(editor, n)}
                 )
-                list = {type: 'bulleted-list', indent: tabs, children: []}
+                list = {type: 'bulleted-list', indent, children: []}
                 Transforms.wrapNodes(editor, list, {
                     match: n => n.type === 'list-item',
                 })
@@ -122,10 +116,10 @@ export const withMarkdown = (editor: Editor) => {
                 Transforms.delete(editor)
                 Transforms.setNodes(
                     editor,
-                    {type: 'list-item'},
+                    {type: 'list-item', indent:null},
                     {match: n => Editor.isBlock(editor, n)}
                 )
-                list = {type: 'numbered-list', indent: tabs, children: []}
+                list = {type: 'numbered-list', indent, start: 1, children: []}
                 Transforms.wrapNodes(editor, list, {
                     match: n => n.type === 'list-item',
                 })
