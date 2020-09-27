@@ -7,49 +7,49 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { Icon } from '../../components'
 
-import CheckLists from '../../examples/check-lists'
+// import CheckLists from '../../examples/check-lists'
 // import EditableVoids from '../../examples/editable-voids'
-import Embeds from '../../examples/embeds'
-import ForcedLayout from '../../examples/forced-layout'
-import HoveringToolbar from '../../examples/hovering-toolbar'
-import HugeDocument from '../../examples/huge-document'
-import Images from '../../examples/images'
-import Links from '../../examples/links'
-import MarkdownPreview from '../../examples/markdown-preview'
-import MarkdownShortcuts from '../../examples/markdown-shortcuts'
-import Mentions from '../../examples/mentions'
-import PasteHtml from '../../examples/paste-html'
-import PlainText from '../../examples/plaintext'
-import ReadOnly from '../../examples/read-only'
-import RichText from '../../examples/richtext'
-import SearchHighlighting from '../../examples/search-highlighting'
-import CodeHighlighting from '../../examples/code-highlighting'
-import Tables from '../../examples/tables'
+// import Embeds from '../../examples/embeds'
+// import ForcedLayout from '../../examples/forced-layout'
+// import HoveringToolbar from '../../examples/hovering-toolbar'
+// import HugeDocument from '../../examples/huge-document'
+// import Images from '../../examples/images'
+// import Links from '../../examples/links'
+// import MarkdownPreview from '../../examples/markdown-preview'
+// import MarkdownShortcuts from '../../examples/markdown-shortcuts'
+// import Mentions from '../../examples/mentions'
+// import PasteHtml from '../../examples/paste-html'
+// import PlainText from '../../examples/plaintext'
+// import ReadOnly from '../../examples/read-only'
+// import RichText from '../../examples/richtext'
+// import SearchHighlighting from '../../examples/search-highlighting'
+// import CodeHighlighting from '../../examples/code-highlighting'
+// import Tables from '../../examples/tables'
 import GYEdit from '../../examples/gyedit'
 
 // node
 import { getAllExamples } from '../api'
 
 const EXAMPLES = [
-  ['Checklists', CheckLists, 'check-lists'],
+  // ['Checklists', CheckLists, 'check-lists'],
   // ['Editable Voids', EditableVoids, 'editable-voids'],
-  ['Embeds', Embeds, 'embeds'],
-  ['Forced Layout', ForcedLayout, 'forced-layout'],
+  // ['Embeds', Embeds, 'embeds'],
+  // ['Forced Layout', ForcedLayout, 'forced-layout'],
     ['GYEdit', GYEdit, 'gyedit'],
-  ['Hovering Toolbar', HoveringToolbar, 'hovering-toolbar'],
-  ['Huge Document', HugeDocument, 'huge-document'],
-  ['Images', Images, 'images'],
-  ['Links', Links, 'links'],
-  ['Markdown Preview', MarkdownPreview, 'markdown-preview'],
-  ['Markdown Shortcuts', MarkdownShortcuts, 'markdown-shortcuts'],
-  ['Mentions', Mentions, 'mentions'],
-  ['Paste HTML', PasteHtml, 'paste-html'],
-  ['Plain Text', PlainText, 'plaintext'],
-  ['Read-only', ReadOnly, 'read-only'],
-  ['Rich Text', RichText, 'richtext'],
-  ['Search Highlighting', SearchHighlighting, 'search-highlighting'],
-  ['Code Highlighting', CodeHighlighting, 'code-highlighting'],
-  ['Tables', Tables, 'tables'],
+  // ['Hovering Toolbar', HoveringToolbar, 'hovering-toolbar'],
+  // ['Huge Document', HugeDocument, 'huge-document'],
+  // ['Images', Images, 'images'],
+  // ['Links', Links, 'links'],
+  // ['Markdown Preview', MarkdownPreview, 'markdown-preview'],
+  // ['Markdown Shortcuts', MarkdownShortcuts, 'markdown-shortcuts'],
+  // ['Mentions', Mentions, 'mentions'],
+  // ['Paste HTML', PasteHtml, 'paste-html'],
+  // ['Plain Text', PlainText, 'plaintext'],
+  // ['Read-only', ReadOnly, 'read-only'],
+  // ['Rich Text', RichText, 'richtext'],
+  // ['Search Highlighting', SearchHighlighting, 'search-highlighting'],
+  // ['Code Highlighting', CodeHighlighting, 'code-highlighting'],
+  // ['Tables', Tables, 'tables'],
 ]
 
 const Header = props => (
