@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var InlineType;\n\n(function (InlineType) {\n  InlineType[InlineType[\"link\"] = 0] = \"link\";\n})(InlineType || (InlineType = {}));","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { readdirSync } from 'fs';\nimport { join } from 'path';\nconst examplePath = join(process.cwd(), 'examples');\nexport function getAllExamples() {\n  const slugs = readdirSync(examplePath);\n  return slugs.filter(name => name.match(/.tsx$/)).map(n => n.replace(/.tsx$/, ''));\n}","map":null,"metadata":{},"sourceType":"module"}

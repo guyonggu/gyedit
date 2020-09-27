@@ -1,5 +1,4 @@
 *.log
-.next/
 .vscode/
 .idea/
 .yarn/
