@@ -62,14 +62,20 @@ export const fixList = (editor:Editor, path?:Path): void => {
     if (entry[0].type === 'list-item') {
         const [node, path] = Editor.parent(editor,entry[1]) as NodeEntry<ListNode>
         const [preNode, prePath] = Editor.previous(editor, {at: path}) || [undefined, undefined]
-
-        // merge
+        const ref = Editor.pathRef(editor, path)
+        // merge left
         if (isListNode(preNode) && preNode.type === node.type && preNode.indent === node.indent) {
             Transforms.mergeNodes(editor, {at: path})
         }
+        //merge right
+        const [nextNode, nextPath] = Editor.next(editor, {at:ref.current!}) || [undefined, undefined]
+        if (isListNode(nextNode) && nextNode.type === node.type && nextNode.indent === node.indent){
+            Transforms.mergeNodes(editor, {at: nextPath})
+        }
+
         let listStart: number[] = prePath ? getListStart(editor, prePath) : []
         console.log("updateListStart:", listStart)
-        updateListStart(editor, path, listStart)
+        updateListStart(editor, ref.unref()!, listStart)
     }else {
         const next = Editor.next(editor, {at:entry[1]})
         if (next && isListNode(next[0])){
