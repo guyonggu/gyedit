@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "cd ./site && next dev",
     "build": "cd ./site && next build",
+    "export": "cd ./site && next build && next export",
     "build:rollup": "rollup --config ./config/rollup/rollup.config.js",
     "serve": "cd ./site && next",
     "start": "npm-run-all --parallel --print-label watch serve",
