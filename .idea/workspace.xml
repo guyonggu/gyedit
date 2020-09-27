@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffd80b1f-7d28-48c7-966d-30a47b503009" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/list/deleteFragment/start_at_start_of_listItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/onKeyDown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/onKeyDown.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/withMarkdown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/withMarkdown.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
       <workItem from="1601122239434" duration="11795000" />
       <workItem from="1601178576134" duration="1435000" />
       <workItem from="1601181863945" duration="10174000" />
-      <workItem from="1601194917928" duration="5368000" />
+      <workItem from="1601194917928" duration="6075000" />
     </task>
     <servers />
   </component>
@@ -87,10 +84,11 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="488" y="203" key="FileChooserDialogImpl/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1600868209080" />
-    <state x="407" y="196" width="586" height="490" key="find.popup" timestamp="1601098848263">
+    <state x="407" y="196" width="586" height="490" key="find.popup" timestamp="1601207077564">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="407" y="196" width="586" height="490" key="find.popup/-1600.23.1600.877/0.23.1440.877@0.23.1440.877" timestamp="1601098848263" />
+    <state x="407" y="196" width="586" height="490" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1601207077564" />
     <state x="365" y="203" width="670" height="676" key="search.everywhere.popup" timestamp="1601123052956">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
