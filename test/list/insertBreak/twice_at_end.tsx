@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import { Transforms, Editor } from 'slate'
-import { jsx } from '../'
+import { jsx } from '../../index'
 
 export const input = (
     <editor>
@@ -20,7 +20,7 @@ export const output = (
     <editor>
         <bulletedList start={1} indent={0}>
             <listItem>one</listItem>
-            <listItem><cursor /></listItem>
         </bulletedList>
+        <paragraph indent={0}><cursor /></paragraph>
     </editor>
 )

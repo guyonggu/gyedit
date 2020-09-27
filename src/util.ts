@@ -63,7 +63,7 @@ export const fixList = (editor:Editor, path?:Path): void => {
         const [node, path] = Editor.parent(editor,entry[1]) as NodeEntry<ListNode>
         const [preNode, prePath] = Editor.previous(editor, {at: path}) || [undefined, undefined]
         const ref = Editor.pathRef(editor, path)
-        console.log("fix:",entry[0].type, "at:", path)
+        console.log("fix:",node.type, "at:", path)
         // merge left
         if (isListNode(preNode) && preNode.type === node.type && preNode.indent === node.indent) {
             Transforms.mergeNodes(editor, {at: path})
@@ -94,6 +94,9 @@ export const fixList = (editor:Editor, path?:Path): void => {
 }
 
 const updateListStart = (editor:Editor, path:Path, listStart:number[]):void => {
+    if (!Node.has(editor,path)){
+        return
+    }
     let [node] = Editor.node(editor, path)
     while (isListNode(node)){
         const indent = node.indent || 0

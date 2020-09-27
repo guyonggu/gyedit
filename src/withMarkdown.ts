@@ -206,6 +206,7 @@ export const withMarkdown = (editor: Editor) => {
     }
 
     editor.deleteBackward = (unit: 'character' | 'word' | 'line' | 'block') => {
+        console.log("editor.deleteBackward:", unit)
         deleteBackward2(unit)
         fixList(editor)
     }
