@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffd80b1f-7d28-48c7-966d-30a47b503009" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/list/insertBreak/inside.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/list/insertText/inside_list.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/list/insertText/outside_list.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/list/onKeyDown/tab_at_start.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/list/onKeyDown/tab_inside.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/list/onKeyDown/tab_with_selection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/list/deleteFragment/start_at_start_of_listItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/onKeyDown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/onKeyDown.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/withMarkdown.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/withMarkdown.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/list/above.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/list/insertBreak.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/test/list/insertBreak/twice_at_end.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +70,8 @@
       <workItem from="1601083091560" duration="14549000" />
       <workItem from="1601122239434" duration="11795000" />
       <workItem from="1601178576134" duration="1435000" />
-      <workItem from="1601181863945" duration="10084000" />
+      <workItem from="1601181863945" duration="10174000" />
+      <workItem from="1601194917928" duration="5368000" />
     </task>
     <servers />
   </component>

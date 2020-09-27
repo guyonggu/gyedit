@@ -1,6 +1,6 @@
-import {Editor, Path, Point, Range, Transforms, NodeEntry} from "slate";
+import {Editor, Path, Point, Range, Element, Text, Transforms, NodeEntry} from "slate";
 import {ListNode} from './types'
-import {fixList} from "./util";
+import {fixList, isListNode} from "./util";
 
 const SHORTCUTS = {
     '*': 'ul-item',
@@ -16,7 +16,7 @@ const SHORTCUTS = {
 }
 
 export const withMarkdown = (editor: Editor) => {
-    const {deleteBackward, insertText, insertBreak} = editor
+    const {deleteBackward, insertText, insertBreak, deleteFragment, normalizeNode} = editor
 
     const insertBreak2 = () => {
         let handled = false
@@ -56,8 +56,10 @@ export const withMarkdown = (editor: Editor) => {
         }
     }
     editor.insertBreak = () => {
-        insertBreak2()
-        fixList(editor)
+        Editor.withoutNormalizing(editor, () => {
+            insertBreak2()
+            fixList(editor)
+        })
     }
     editor.insertText = (text: string) => {
         const {selection} = editor
@@ -206,10 +208,26 @@ export const withMarkdown = (editor: Editor) => {
     }
 
     editor.deleteBackward = (unit: 'character' | 'word' | 'line' | 'block') => {
-        console.log("editor.deleteBackward:", unit)
-        deleteBackward2(unit)
-        fixList(editor)
+        Editor.withoutNormalizing(editor, () => {
+            deleteBackward2(unit)
+            fixList(editor)
+        })
     }
+
+    editor.deleteFragment = () => {
+        // console.log("editor.deleteFragment:")
+        deleteFragment()
+    }
+    editor.normalizeNode = (entry: NodeEntry) => {
+        if (Element.isElement(entry[0]) && entry[0].type !== 'list-item') {
+            const [pNode] = Editor.parent(editor, entry[1])!
+            if (isListNode(pNode)) {
+                Transforms.setNodes(editor, {type: 'list-item'}, {at: entry[1]})
+            }
+        }
+        normalizeNode(entry)
+    }
+
     return editor
 }
 
@@ -227,3 +245,310 @@ const beforeTextInBlock = (editor: Editor): string => {
     let beforeText = Editor.string(editor, range)
     return beforeText
 }
+//
+// Transforms.delete =(
+//     editor: Editor,
+//     options: {
+//     at?: Location
+//     distance?: number
+//     unit?: 'character' | 'word' | 'line' | 'block'
+//     reverse?: boolean
+//     hanging?: boolean
+//     voids?: boolean
+// } = {}
+// ):void => {
+//     Editor.withoutNormalizing(editor, () => {
+//         const {
+//             reverse = false,
+//             unit = 'character',
+//             distance = 1,
+//             voids = false,
+//         } = options
+//         let { at = editor.selection, hanging = false } = options
+//
+//         if (!at) {
+//             return
+//         }
+//
+//         if (Range.isRange(at) && Range.isCollapsed(at)) {
+//             at = at.anchor
+//         }
+//
+//         if (Point.isPoint(at)) {
+//             const furthestVoid = Editor.void(editor, { at, mode: 'highest' })
+//
+//             if (!voids && furthestVoid) {
+//                 const [, voidPath] = furthestVoid
+//                 at = voidPath
+//             } else {
+//                 const opts = { unit, distance }
+//                 const target = reverse
+//                     ? Editor.before(editor, at, opts) || Editor.start(editor, [])
+//                     : Editor.after(editor, at, opts) || Editor.end(editor, [])
+//                 at = { anchor: at, focus: target }
+//                 hanging = true
+//             }
+//         }
+//
+//         if (Path.isPath(at)) {
+//             Transforms.removeNodes(editor, { at, voids })
+//             return
+//         }
+//
+//         if (Range.isCollapsed(at)) {
+//             return
+//         }
+//
+//         if (!hanging) {
+//             at = Editor.unhangRange(editor, at, { voids })
+//         }
+//
+//         let [start, end] = Range.edges(at)
+//         const startBlock = Editor.above(editor, {
+//             match: n => Editor.isBlock(editor, n),
+//             at: start,
+//             voids,
+//         })
+//         const endBlock = Editor.above(editor, {
+//             match: n => Editor.isBlock(editor, n),
+//             at: end,
+//             voids,
+//         })
+//         const isAcrossBlocks =
+//             startBlock && endBlock && !Path.equals(startBlock[1], endBlock[1])
+//         const isSingleText = Path.equals(start.path, end.path)
+//         const startVoid = voids
+//             ? null
+//             : Editor.void(editor, { at: start, mode: 'highest' })
+//         const endVoid = voids
+//             ? null
+//             : Editor.void(editor, { at: end, mode: 'highest' })
+//
+//         // If the start or end points are inside an inline void, nudge them out.
+//         if (startVoid) {
+//             const before = Editor.before(editor, start)
+//
+//             if (
+//                 before &&
+//                 startBlock &&
+//                 Path.isAncestor(startBlock[1], before.path)
+//             ) {
+//                 start = before
+//             }
+//         }
+//
+//         if (endVoid) {
+//             const after = Editor.after(editor, end)
+//
+//             if (after && endBlock && Path.isAncestor(endBlock[1], after.path)) {
+//                 end = after
+//             }
+//         }
+//
+//         // Get the highest nodes that are completely inside the range, as well as
+//         // the start and end nodes.
+//         const matches: NodeEntry[] = []
+//         let lastPath: Path | undefined
+//
+//         for (const entry of Editor.nodes(editor, { at, voids })) {
+//             const [node, path] = entry
+//
+//             if (lastPath && Path.compare(path, lastPath) === 0) {
+//                 continue
+//             }
+//
+//             if (
+//                 (!voids && Editor.isVoid(editor, node)) ||
+//                 (!Path.isCommon(path, start.path) && !Path.isCommon(path, end.path))
+//             ) {
+//                 matches.push(entry)
+//                 lastPath = path
+//             }
+//         }
+//
+//         const pathRefs = Array.from(matches, ([, p]) => Editor.pathRef(editor, p))
+//         const startRef = Editor.pointRef(editor, start)
+//         const endRef = Editor.pointRef(editor, end)
+//
+//         if (!isSingleText && !startVoid) {
+//             const point = startRef.current!
+//             const [node] = Editor.leaf(editor, point)
+//             const { path } = point
+//             const { offset } = start
+//             const text = node.text.slice(offset)
+//             editor.apply({ type: 'remove_text', path, offset, text })
+//         }
+//
+//         for (const pathRef of pathRefs) {
+//             const path = pathRef.unref()!
+//             console.log("remove not at:", path)
+//             Transforms.removeNodes(editor, { at: path, voids })
+//         }
+//
+//         if (!endVoid) {
+//             const point = endRef.current!
+//             const [node] = Editor.leaf(editor, point)
+//             const { path } = point
+//             const offset = isSingleText ? start.offset : 0
+//             const text = node.text.slice(offset, end.offset)
+//             editor.apply({ type: 'remove_text', path, offset, text })
+//         }
+//
+//         if (
+//             !isSingleText &&
+//             isAcrossBlocks &&
+//             endRef.current &&
+//             startRef.current
+//         ) {
+//             console.log("merge node at:", endRef.current)
+//             Transforms.mergeNodes(editor, {
+//                 at: endRef.current,
+//                 hanging: true,
+//                 voids,
+//             })
+//         }
+//
+//         const point = endRef.unref() || startRef.unref()
+//
+//         if (options.at == null && point) {
+//             Transforms.select(editor, point)
+//         }
+//     })
+// }
+//
+// Transforms.mergeNodes = (
+//     editor: Editor,
+//     options: {
+//     at?: Location
+//     match?: (node: Node) => boolean
+//     mode?: 'highest' | 'lowest'
+//     hanging?: boolean
+//     voids?: boolean
+// } = {}
+// ) => {
+//     Editor.withoutNormalizing(editor, () => {
+//         let { match, at = editor.selection } = options
+//         const { hanging = false, voids = false, mode = 'lowest' } = options
+//
+//         if (!at) {
+//             return
+//         }
+//
+//         if (match == null) {
+//             if (Path.isPath(at)) {
+//                 const [parent] = Editor.parent(editor, at)
+//                 match = n => parent.children.includes(n)
+//             } else {
+//                 match = n => Editor.isBlock(editor, n)
+//             }
+//         }
+//
+//         if (!hanging && Range.isRange(at)) {
+//             at = Editor.unhangRange(editor, at)
+//         }
+//
+//         if (Range.isRange(at)) {
+//             if (Range.isCollapsed(at)) {
+//                 at = at.anchor
+//             } else {
+//                 const [, end] = Range.edges(at)
+//                 const pointRef = Editor.pointRef(editor, end)
+//                 Transforms.delete(editor, { at })
+//                 at = pointRef.unref()!
+//
+//                 if (options.at == null) {
+//                     Transforms.select(editor, at)
+//                 }
+//             }
+//         }
+//
+//         const [current] = Editor.nodes(editor, { at, match, voids, mode })
+//         const prev = Editor.previous(editor, { at, match, voids, mode })
+//
+//         if (!current || !prev) {
+//             return
+//         }
+//
+//         const [node, path] = current
+//         const [prevNode, prevPath] = prev
+//
+//         if (path.length === 0 || prevPath.length === 0) {
+//             return
+//         }
+//
+//         const newPath = Path.next(prevPath)
+//         const commonPath = Path.common(path, prevPath)
+//         const isPreviousSibling = Path.isSibling(path, prevPath)
+//         const levels = Array.from(Editor.levels(editor, { at: path }), ([n]) => n)
+//             .slice(commonPath.length)
+//             .slice(0, -1)
+//
+//         // Determine if the merge will leave an ancestor of the path empty as a
+//         // result, in which case we'll want to remove it after merging.
+//         const emptyAncestor = Editor.above(editor, {
+//             at: path,
+//             mode: 'highest',
+//             match: n =>
+//                 levels.includes(n) && Element.isElement(n) && n.children.length === 1,
+//         })
+//
+//         const emptyRef = emptyAncestor && Editor.pathRef(editor, emptyAncestor[1])
+//         let properties
+//         let position
+//
+//         // Ensure that the nodes are equivalent, and figure out what the position
+//         // and extra properties of the merge will be.
+//         if (Text.isText(node) && Text.isText(prevNode)) {
+//             const { text, ...rest } = node
+//             position = prevNode.text.length
+//             properties = rest as Partial<Text>
+//         } else if (Element.isElement(node) && Element.isElement(prevNode)) {
+//             const { children, ...rest } = node
+//             position = prevNode.children.length
+//             properties = rest as Partial<Element>
+//         } else {
+//             throw new Error(
+//                 `Cannot merge the node at path [${path}] with the previous sibling because it is not the same kind: ${JSON.stringify(
+//                     node
+//                 )} ${JSON.stringify(prevNode)}`
+//             )
+//         }
+//
+//         // If the node isn't already the next sibling of the previous node, move
+//         // it so that it is before merging.
+//         if (!isPreviousSibling) {
+//             console.log("In merge, movNodes from ", path, "to", newPath)
+//             Transforms.moveNodes(editor, { at: path, to: newPath, voids })
+//         }
+//
+//         // If there was going to be an empty ancestor of the node that was merged,
+//         // we remove it from the tree.
+//         if (emptyRef) {
+//             console.log("In merge, remove node at:", emptyRef.current)
+//             Transforms.removeNodes(editor, { at: emptyRef.current!, voids })
+//         }
+//
+//         // If the target node that we're merging with is empty, remove it instead
+//         // of merging the two. This is a common rich text editor behavior to
+//         // prevent losing formatting when deleting entire nodes when you have a
+//         // hanging selection.
+//         if (
+//             (Element.isElement(prevNode) && Editor.isEmpty(editor, prevNode)) ||
+//             (Text.isText(prevNode) && prevNode.text === '')
+//         ) {
+//             console.log("In merge, remove2", prevNode.type, "node at:", prevPath)
+//             Transforms.removeNodes(editor, { at: prevPath, voids })
+//         } else {
+//             editor.apply({
+//                 type: 'merge_node',
+//                 path: newPath,
+//                 position,
+//                 properties,
+//             })
+//         }
+//
+//         if (emptyRef) {
+//             emptyRef.unref()
+//         }
+//     })
+// }
