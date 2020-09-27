@@ -5,6 +5,7 @@
 build/
 dist/
 lib/
+.next/
 node_modules/
 packages/*/yarn.lock
 site/out/

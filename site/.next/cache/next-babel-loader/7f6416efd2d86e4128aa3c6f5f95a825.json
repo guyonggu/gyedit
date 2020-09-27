@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { useEffect } from 'react';\nimport { useRouter } from 'next/router';\n\nvar Home = function Home() {\n  var router = useRouter();\n  useEffect(function () {\n    router.replace(\"/examples\");\n  });\n  return null;\n};\n\nexport default Home;","map":null,"metadata":{},"sourceType":"module"}

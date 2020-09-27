@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { useEffect } from 'react';\nimport { useRouter } from 'next/router';\n\nconst Example = () => {\n  const router = useRouter();\n  useEffect(() => {\n    router.replace(`/examples/richtext`);\n  });\n  return null;\n};\n\nexport default Example;","map":null,"metadata":{},"sourceType":"module"}
