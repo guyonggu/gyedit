@@ -5,7 +5,7 @@ import { Editor, Transforms, createEditor, Node } from 'slate'
 import { withHistory } from 'slate-history'
 
 import { Button, Icon, Toolbar } from '../components'
-import { withMarkdown, onKeyDown, Element, Leaf } from '../../src/'
+import { withMarkdown, onKeyDown, Element, Leaf } from '../src/'
 
 // import '../pages/index.scss'
 

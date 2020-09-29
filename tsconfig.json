@@ -1,15 +1,32 @@
 {
-  "extends": "./config/typescript/tsconfig.json",
-  "include": ["src/**/*", "test/**/*"],
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
   "exclude": [
     "node_modules"
   ],
-  "compilerOptions": {
-    "rootDirs": ["./src","./test"],
-    "outDir": "./lib",
-    "tsx": "react"
-  },
-  "strict": false,
-  "noImplicitAny": false,
-  "esModuleInterop": true
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../src/**/*.ts",
+    "../src/**/*.tsx"
+  ]
 }
